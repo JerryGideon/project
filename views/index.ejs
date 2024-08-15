@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4;
+        position: relative;
+      }
+
+      .container {
+        text-align: center;
+        position: relative;
+      }
+
+      .header {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .login-btn {
+        text-decoration: none;
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .radio-option {
+        margin: 15px 0;
+      }
+
+      input[type='radio'] {
+        margin-right: 10px;
+      }
+
+      .option {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        margin: 10px 0;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .option:hover {
+        background-color: #575757;
+      }
+
+      .live-time {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 16px;
+        color: #333;
+      }
+    </style>
+    <script>
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+        const dateString = now.toLocaleDateString('en-US');
+        document.getElementById(
+          'live-time'
+        ).textContent = `${dateString} - ${timeString}`;
+      }
+      setInterval(updateTime, 1000);
+      window.onload = updateTime;
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <a href="/login" class="login-btn">Login Admin</a>
+    </div>
+    <div class="container">
+      <div class="center-content">
+        <button class="option">Nama</button>
+        <button class="option">Waktu</button>
+      </div>
+    </div>
+    <div id="live-time" class="live-time"></div>
+  </body>
+</html>
