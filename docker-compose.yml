@@ -1,0 +1,39 @@
+services:
+  app:
+    container_name: project
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: 'project'
+    ports:
+      - 9000:80
+    cap_drop:
+      - ALL
+    security_opt:
+      - 'no-new-privileges=true'
+    volumes:
+      - ./base/.env:/var/www/html/.env
+    restart: always
+    networks:
+      - project-net
+  db:
+    image: postgres:16
+    container_name: dbproject
+    ports:
+      - '5000:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dbproject
+      PGPORT: 5432
+      TZ: Asia/Jakarta
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./dbproject_20240405.backup:/dbproject_20240405.backup
+    restart: always
+    networks:
+      - project-net
+networks:
+  project-net:
+    name: project-net
+    driver: bridge
